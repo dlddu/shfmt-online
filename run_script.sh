@@ -17,4 +17,10 @@ done
 
 curl https://api.github.com/gists/08cae87693f16def7603238df4486248 | jq -r '.files."generate_https_proxy_conf.sh".content' | sh -s -- "$DOMAIN" $PROJECT_NAME 3000 >conf.d/$PROJECT_NAME.conf
 
-(docker compose exec reverse-proxy nginx -t && docker compose exec reverse-proxy nginx -s reload) || curl -L https://notification.dlddu.com/notify/csj6922 -d "$PROJECT_NAME deployment failed"
+while ! docker compose exec reverse-proxy nginx -t; do
+	sleep 1
+done
+
+docker compose exec reverse-proxy nginx -s reload
+
+curl -L https://notification.dlddu.com/notify/csj6922 -d "$PROJECT_NAME deployment is complete"
