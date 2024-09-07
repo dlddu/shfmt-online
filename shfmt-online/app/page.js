@@ -4,7 +4,8 @@ import { useState } from "react";
 
 export default function Home() {
   const [input, setInput] = useState("");
-  const [output, setOutput] = useState("");
+  const [result, setResult] = useState("");
+  const [diff, setDiff] = useState("");
 
   return (
     <main className="flex flex-col gap-10 h-screen">
@@ -17,18 +18,26 @@ export default function Home() {
         <textarea
           className="text-slate-700 w-full"
           readOnly={true}
-          value={output}
+          value={result}
+        ></textarea>
+        <textarea
+          className="text-slate-700 w-full"
+          readOnly={true}
+          value={diff}
         ></textarea>
       </div>
       <button
         className="border-white border-2 w-1/2 self-center"
         onClick={async () => {
-          const result = await fetch("/format", {
+          const response = await fetch("/format", {
             method: "POST",
             headers: { "Content-Type": "plain/text" },
             body: input,
           });
-          setOutput(await result.text());
+          console.log(response);
+          const { result, diff } = await response.json();
+          setResult(result);
+          setDiff(diff);
         }}
       >
         Format
