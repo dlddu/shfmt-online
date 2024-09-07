@@ -1,3 +1,4 @@
 /99-auto-reload.sh
 /.env
 /conf.d
+/docker-compose-reverse-proxy.yml

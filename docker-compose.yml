@@ -1,0 +1,10 @@
+name: shfmt-online
+include: [docker-compose-reverse-proxy.yml]
+
+services:
+  shfmt-online:
+    image: node:20
+    volumes:
+      - ./shfmt-online:/app
+    working_dir: /app
+    command: bash -c "apt update && apt install -y shfmt && npm install && npm run build && npm run start"
