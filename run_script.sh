@@ -4,7 +4,7 @@ PROJECT_NAME=shfmt-online
 DOMAIN=$1
 CERTIFICATE_EXPIRATION_EMAIL=$2
 
-SETUP_REVERSE_PROXY=$(curl https://api.github.com/gists/5f705a3d30773203fd87e015d519b647)
+SETUP_REVERSE_PROXY=$(curl https://api.github.com/gists/80fade618d3796df88a48e6d640c19ea)
 
 echo "$SETUP_REVERSE_PROXY" | jq -r '.files."docker-compose-reverse-proxy.yml".content' >docker-compose-reverse-proxy.yml
 echo "$SETUP_REVERSE_PROXY" | jq -r '.files."setup_reverse_proxy.sh".content' | sh -s -- "$DOMAIN" "$CERTIFICATE_EXPIRATION_EMAIL"
@@ -15,7 +15,7 @@ while ! docker compose exec reverse-proxy curl -f http://localhost; do
 	sleep 1
 done
 
-curl https://api.github.com/gists/08cae87693f16def7603238df4486248 | jq -r '.files."generate_https_proxy_conf.sh".content' | sh -s -- "$DOMAIN" $PROJECT_NAME 3000 >conf.d/$PROJECT_NAME.conf
+curl https://api.github.com/gists/1bd13929dc5b291cba2853824a5fcd26 | jq -r '.files."generate_https_proxy_conf.sh".content' | sh -s -- "$DOMAIN" $PROJECT_NAME 3000 >conf.d/$PROJECT_NAME.conf
 
 while ! docker compose exec reverse-proxy nginx -t; do
 	sleep 1
