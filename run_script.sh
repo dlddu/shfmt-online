@@ -32,5 +32,3 @@ while ! docker compose exec reverse-proxy nginx -t; do
 done
 
 docker compose exec reverse-proxy nginx -s reload
-
-curl -L https://notification.dlddu.com/notify/csj6922 -d "$PROJECT_NAME deployment is complete"
