@@ -1,8 +1,18 @@
 #!/bin/bash
 
 PROJECT_NAME=shfmt-online
-DOMAIN=$1
-CERTIFICATE_EXPIRATION_EMAIL=$2
+
+if test -f .env; then
+	source .env
+else
+	DOMAIN=$1
+	CERTIFICATE_EXPIRATION_EMAIL=$2
+fi
+
+if test -z "$DOMAIN" || test -z "$CERTIFICATE_EXPIRATION_EMAIL"; then
+	echo "Usage: $0 DOMAIN CERTIFICATE_EXPIRATION_EMAIL"
+	return 1
+fi
 
 SETUP_REVERSE_PROXY=$(curl https://api.github.com/gists/80fade618d3796df88a48e6d640c19ea)
 
