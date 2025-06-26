@@ -17,7 +17,9 @@
     "vscode": {
       "extensions": [
         "esbenp.prettier-vscode",
-        "donjayamanne.githistory"
+        "donjayamanne.githistory",
+        "redhat.vscode-yaml",
+        "ms-azuretools.vscode-docker"
       ]
     }
   },

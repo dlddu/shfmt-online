@@ -1,1 +1,1 @@
-https://shfmt.dlddu.com/
+https://shfmt.lkm.onl/
