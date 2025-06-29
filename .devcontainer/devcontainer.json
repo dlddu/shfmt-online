@@ -25,5 +25,12 @@
   },
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "root"
-  "runArgs": ["--name", "dlddu-shfmt-online"]
+  "runArgs": ["--name", "dlddu-shfmt-online"],
+  "mounts": [
+    {
+      "source": "dlddu-shfmt-online-dind",
+      "target": "/var/lib/docker",
+      "type": "volume"
+    }
+  ]
 }
